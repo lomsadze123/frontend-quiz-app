@@ -2,7 +2,7 @@ import html from "../../assets/icons/icon-html.svg";
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center">
+    <header className="flex justify-between items-center mb-[60px]">
       <div className="flex items-center gap-2">
         <img src={html} alt="" />
         <p>HTML</p>

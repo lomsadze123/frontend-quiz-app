@@ -8,8 +8,8 @@ const App = () => {
     <div className="p-5">
       <Header />
       <Routes>
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Auth />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </div>
   );
