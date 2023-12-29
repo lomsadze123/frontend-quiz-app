@@ -1,12 +1,9 @@
-import html from "../../assets/icons/icon-html.svg";
+import PathComponent from "./PathComponent";
 
 const Header = () => {
   return (
     <header className="flex justify-between items-center mb-[60px]">
-      <div className="flex items-center gap-2">
-        <img src={html} alt="" />
-        <p>HTML</p>
-      </div>
+      <PathComponent />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="112"
