@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FormTypes } from "../../types/Types";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Auth = () => {
   const {
@@ -24,7 +25,10 @@ const Auth = () => {
   };
 
   return (
-    <form
+    <motion.form
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       className="flex flex-col items-center gap-[58.4px] text-[15px] md:gap-[72.4px]"
@@ -83,7 +87,7 @@ const Auth = () => {
           SUBMIT
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

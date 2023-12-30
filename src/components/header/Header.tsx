@@ -1,9 +1,14 @@
+import { useLocation } from "react-router-dom";
 import PathComponent from "./PathComponent";
 
 const Header = () => {
+  const location = useLocation();
+  const index = location.state;
+  const pathname = location.pathname.slice(1);
+
   return (
-    <header className="flex justify-between items-center mb-[60px]">
-      <PathComponent />
+    <header className="flex justify-between items-center mb-[60px] lg:mb-[140px]">
+      <PathComponent index={index} pathname={pathname} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="112"

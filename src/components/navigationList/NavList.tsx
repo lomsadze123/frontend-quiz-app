@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import images from "../../services/Images";
+import { motion } from "framer-motion";
 
 const NavList = () => {
   const list = ["HTML", "CSS", "JavaScript", "Accessibility"];
   return (
-    <ul className="flex flex-col gap-3 md:gap-5 flex-1 max-w-[660px]">
+    <motion.ul
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+      className="flex flex-col gap-3 md:gap-5 flex-1 max-w-[660px]"
+    >
       {list.map((items, index) => (
         <Link to={`/${items}`} key={items} state={{ index }}>
           <li className="flex items-center bg-white p-5 rounded-[12px] gap-[15px] md:gap-[30px] shadow-md md:rounded-[24px]">
@@ -19,7 +25,7 @@ const NavList = () => {
           </li>
         </Link>
       ))}
-    </ul>
+    </motion.ul>
   );
 };
 
