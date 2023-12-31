@@ -1,15 +1,26 @@
 import { useLocation } from "react-router-dom";
 import PathComponent from "./PathComponent";
 
-const Header = () => {
+const Header = ({
+  handleMode,
+  mode,
+}: {
+  handleMode: (() => void) | string;
+  mode: string | (() => void);
+}) => {
   const location = useLocation();
   const index = location.state;
   const pathname = location.pathname.slice(1);
 
   return (
     <header className="flex justify-between items-center mb-[60px] lg:mb-[140px]">
-      <PathComponent index={index} pathname={pathname} />
+      <PathComponent index={index} pathname={pathname} mode={mode} />
       <svg
+        onClick={
+          (typeof handleMode === "function" ? handleMode : undefined) as
+            | React.MouseEventHandler<SVGSVGElement>
+            | undefined
+        }
         xmlns="http://www.w3.org/2000/svg"
         width="112"
         height="28"
@@ -25,7 +36,7 @@ const Header = () => {
           className="cursor-pointer"
         ></rect>
         <circle
-          cx="69"
+          cx={mode === "light" ? 50 : 69}
           cy="14"
           r="10"
           fill="white"

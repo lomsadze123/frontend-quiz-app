@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import PathComponent from "../../components/header/PathComponent";
 import { motion } from "framer-motion";
 
-const Finish = () => {
+const Finish = ({ mode }: { mode: string | (() => void) }) => {
   const location = useLocation();
   const index = location.state;
   const { score, pathname } = location.state;
@@ -14,7 +14,9 @@ const Finish = () => {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-[40px] text-[#313E51] font-light leading-[100%] md:text-[64px]"
+          className={`text-[40px] ${
+            mode === "light" ? "text-[#313E51]" : "text-white"
+          } font-light leading-[100%] md:text-[64px]`}
         >
           Quiz completed <br />{" "}
           <span className="font-medium">You scored...</span>{" "}
@@ -25,9 +27,13 @@ const Finish = () => {
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="bg-white text-[#313E51] p-[50px] rounded-[12px] text-center"
+          className={`${
+            mode === "light"
+              ? "text-[#313E51] bg-white"
+              : "text-white bg-[#3B4D66]"
+          } p-[50px] rounded-[12px] text-center`}
         >
-          <PathComponent index={index} pathname={pathname} />
+          <PathComponent index={index} pathname={pathname} mode={mode} />
           <h2 className="text-[88px] font-medium leading-[100%] mt-10 md:text-[144px]">
             {score}
           </h2>

@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 
-const Welcome = () => {
+const Welcome = ({ mode }: { mode: string }) => {
   return (
     <div>
       <motion.h1
         initial={{ x: 100 }}
         animate={{ x: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className="text-[40px] text-[#313E51] font-light leading-[100%] md:text-[64px]"
+        className={`text-[40px] ${
+          mode === "light" ? "text-[#313E51]" : "text-white"
+        } font-light leading-[100%] md:text-[64px]`}
       >
         Welcome to the <br />{" "}
         <span className="font-medium">Frontend Quiz!</span>

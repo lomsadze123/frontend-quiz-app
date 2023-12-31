@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import images from "../../services/Images";
 import { motion } from "framer-motion";
 
+export const list = ["HTML", "CSS", "JavaScript", "Accessibility"];
+
 const NavList = () => {
-  const list = ["HTML", "CSS", "JavaScript", "Accessibility"];
   return (
     <motion.ul
       initial={{ opacity: 0, x: 100 }}

@@ -3,7 +3,7 @@ import { FormTypes } from "../../types/Types";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Auth = () => {
+const Auth = ({ mode }: { mode: string | (() => void) }) => {
   const {
     handleSubmit,
     register,
@@ -33,7 +33,11 @@ const Auth = () => {
       noValidate
       className="flex flex-col items-center gap-[58.4px] text-[15px] md:gap-[72.4px]"
     >
-      <div className="text-white bg-[#626C7F] p-6 w-full rounded-[10px] max-w-[400px] md:w-[400px] md:p-8">
+      <div
+        className={`${
+          mode === "light" ? "bg-white text-black" : "bg-[#3B4D66] text-white"
+        } p-6 w-full rounded-[10px] max-w-[400px] md:w-[400px] md:p-8 shadow-md`}
+      >
         <div className="my-10 flex flex-col gap-6">
           <div className="relative">
             <input
@@ -45,7 +49,9 @@ const Auth = () => {
                   message: "Invalid email address",
                 },
               })}
-              className={`bg-[#626C7F] outline-0 border-b-[1px] ${
+              className={`${
+                mode === "light" ? "bg-white" : "bg-[#3B4D66]"
+              } outline-0 border-b-[1px] ${
                 errors.email?.message
                   ? "border-b-[#FC4748]"
                   : "border-b-[#42495a]"
@@ -68,7 +74,9 @@ const Auth = () => {
                   message: "Minimum length is 5",
                 },
               })}
-              className={`bg-[#626C7F] outline-0 border-b-[1px] ${
+              className={`${
+                mode === "light" ? "bg-white" : "bg-[#3B4D66]"
+              } outline-0 border-b-[1px] ${
                 errors.email?.message
                   ? "border-b-[#FC4747]"
                   : "border-b-[#42495a]"
@@ -83,7 +91,7 @@ const Auth = () => {
             )}
           </div>
         </div>
-        <button className="bg-[#FC4747] rounded py-[14px] w-full mb-6">
+        <button className="bg-[#A729F5] text-white rounded py-[14px] w-full mb-6">
           SUBMIT
         </button>
       </div>

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { DataTypes } from "../../types/Types";
 import { motion } from "framer-motion";
 
-const quiz = () => {
+const quiz = ({ mode }: { mode: string | (() => void) }) => {
   const [data, setData] = useState<DataTypes[]>();
   const [count, setCount] = useState(0);
   const [choose, setChoose] = useState(-1);
@@ -38,10 +38,12 @@ const quiz = () => {
 
   return (
     <main className="flex flex-col gap-9 md:gap-11 lg:flex-row lg:justify-between max-w-[1470px] lg:mx-auto">
-      <section className="flex flex-col gap-3 md:gap-[27.5px]">
-        <p className="italic text-[#313E51] text-sm md:text-xl">
-          Question {count + 1} of 10
-        </p>
+      <section
+        className={`flex flex-col ${
+          mode === "light" ? "text-[#313E51]" : "text-white"
+        } gap-3 md:gap-[27.5px]`}
+      >
+        <p className="italic text-sm md:text-xl">Question {count + 1} of 10</p>
         {data?.map(
           (items, index) =>
             count === index && (
@@ -50,7 +52,7 @@ const quiz = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 key={index}
-                className="text-[#313E51] text-xl font-medium md:text-4xl"
+                className="text-xl font-medium md:text-4xl"
               >
                 {items.question}
               </motion.h2>
@@ -68,7 +70,7 @@ const quiz = () => {
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="flex flex-col gap-[10px] shadow-sm md:gap-[25px] w-[750px]"
+          className="flex flex-col gap-[10px] shadow-sm md:gap-[25px] lg:w-[750px]"
         >
           {data?.map(
             (items, index) =>
@@ -82,10 +84,16 @@ const quiz = () => {
                     }
                   }}
                   key={option}
-                  className={`flex items-center gap-5 text-lg text-[#313E51] font-medium bg-white px-3 py-[10px] leading-[100%] rounded-[12px] md:px-5 md:py-[17.5px]
-                  md:text-[28px] md:rounded-[24px] md:gap-[30px] ${
-                    choose === i ? "border-[#A729F5]" : "border-white"
-                  } border-[3px] transition-all duration-300 lg:hover:border-[#A729F5] group`}
+                  className={`flex items-center gap-5 text-lg ${
+                    mode === "light"
+                      ? choose === i
+                        ? "text-[#313E51] bg-white border-[#A729F5]"
+                        : "text-[#313E51] bg-white border-white"
+                      : choose === i
+                      ? "text-white bg-[#3B4D66] border-[#A729F5]"
+                      : "text-white bg-[#3B4D66] border-[#313E51]"
+                  } font-medium px-3 py-[10px] leading-[100%] rounded-[12px] md:px-5 md:py-[17.5px]
+                md:text-[28px] md:rounded-[24px] md:gap-[30px] border-[3px] transition-all duration-300 lg:hover:border-[#A729F5] group`}
                   disabled={submit > score}
                 >
                   <span
