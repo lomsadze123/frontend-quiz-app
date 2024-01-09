@@ -2,6 +2,17 @@ import { useForm } from "react-hook-form";
 import { FormTypes } from "../../types/Types";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("This field is required")
+    .email("Invalid email address"),
+  password: Yup.string()
+    .required("This field is required")
+    .min(5, "Minimum length is 5"),
+});
 
 const Auth = ({ mode }: { mode: string | (() => void) }) => {
   const {
@@ -10,7 +21,9 @@ const Auth = ({ mode }: { mode: string | (() => void) }) => {
     getValues,
     reset,
     formState: { errors },
-  } = useForm<FormTypes>();
+  } = useForm<FormTypes>({
+    resolver: yupResolver(validationSchema),
+  });
   const navigate = useNavigate();
 
   const onSubmit = async () => {
@@ -41,14 +54,7 @@ const Auth = ({ mode }: { mode: string | (() => void) }) => {
         <div className="my-10 flex flex-col gap-6">
           <div className="relative">
             <input
-              {...register("email", {
-                required: "This field is required",
-                pattern: {
-                  value:
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                  message: "Invalid email address",
-                },
-              })}
+              {...register("email")}
               className={`${
                 mode === "light" ? "bg-white" : "bg-[#3B4D66]"
               } outline-0 border-b-[1px] ${
@@ -67,13 +73,7 @@ const Auth = ({ mode }: { mode: string | (() => void) }) => {
           </div>
           <div className="relative">
             <input
-              {...register("password", {
-                required: "This field is required",
-                minLength: {
-                  value: 5,
-                  message: "Minimum length is 5",
-                },
-              })}
+              {...register("password")}
               className={`${
                 mode === "light" ? "bg-white" : "bg-[#3B4D66]"
               } outline-0 border-b-[1px] ${
