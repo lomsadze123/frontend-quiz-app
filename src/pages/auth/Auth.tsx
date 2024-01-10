@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const validationSchema = Yup.object().shape({
+  username: Yup.string().required("This field is required"),
   email: Yup.string()
     .required("This field is required")
     .email("Invalid email address"),
@@ -52,6 +53,25 @@ const Auth = ({ mode }: { mode: string | (() => void) }) => {
         } p-6 w-full rounded-[10px] max-w-[400px] md:w-[400px] md:p-8 shadow-md`}
       >
         <div className="my-10 flex flex-col gap-6">
+          <div className="relative">
+            <input
+              {...register("username")}
+              className={`${
+                mode === "light" ? "bg-white" : "bg-[#3B4D66]"
+              } outline-0 border-b-[1px] ${
+                errors.username?.message
+                  ? "border-b-[#FC4748]"
+                  : "border-b-[#42495a]"
+              } pb-[18px] pl-4 w-full`}
+              type="text"
+              placeholder="username"
+            />
+            {errors.username?.message && (
+              <p className="text-[#FC4747] absolute right-0 top-0">
+                {errors.username?.message}
+              </p>
+            )}
+          </div>
           <div className="relative">
             <input
               {...register("email")}

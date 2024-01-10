@@ -1,4 +1,5 @@
 export interface FormTypes {
+  username: string;
   email: string;
   password: string;
   repeatPassword?: string;
